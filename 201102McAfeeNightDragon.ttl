@@ -1,0 +1,95 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tgo: <http://example.org/cyber/tgo#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+tgo:Campaign a rdfs:Class .
+
+tgo:Malware a rdfs:Class .
+
+tgo:TargetField a rdfs:Class .
+
+tgo:ThreatActor a rdfs:Class .
+
+tgo:hasAlias rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:hasAssociatedCampaign rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:Campaign .
+
+tgo:hasAssociatedMalware rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:Malware .
+
+tgo:hasTargetedField rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:TargetField .
+
+tgo:hasTitle rdfs:domain tgo:Campaign,
+        tgo:Malware,
+        tgo:TargetField,
+        tgo:ThreatActor ;
+    rdfs:range xsd:string .
+
+tgo:isFocusedBy rdfs:domain tgo:TargetField ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:isLaunchedBy rdfs:domain tgo:Campaign ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:isUsedBy rdfs:domain tgo:Malware ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:apts a tgo:ThreatActor ;
+    tgo:hasTitle "APTs"^^xsd:string .
+
+tgo:blaster a tgo:ThreatActor ;
+    tgo:hasTitle "Blaster"^^xsd:string .
+
+tgo:energy a tgo:TargetField ;
+    tgo:hasTitle "energy"^^xsd:string ;
+    tgo:isFocusedBy tgo:night_dragon .
+
+tgo:government a tgo:TargetField ;
+    tgo:hasTitle "government"^^xsd:string ;
+    tgo:isFocusedBy tgo:night_dragon .
+
+tgo:greg_hoglund a tgo:ThreatActor ;
+    tgo:hasTitle "Greg Hoglund "^^xsd:string .
+
+tgo:night_dragon_attack a tgo:Campaign ;
+    tgo:hasTitle "Night Dragon attack "^^xsd:string ;
+    tgo:isLaunchedBy tgo:night_dragon .
+
+tgo:night_dragon_operation a tgo:Campaign ;
+    tgo:hasTitle "Night Dragon operation "^^xsd:string ;
+    tgo:isLaunchedBy tgo:night_dragon .
+
+tgo:operation_aurora a tgo:Campaign ;
+    tgo:hasTitle "Operation Aurora "^^xsd:string ;
+    tgo:isLaunchedBy tgo:night_dragon .
+
+tgo:petrochemical_companies a tgo:TargetField ;
+    tgo:hasTitle "petrochemical companies "^^xsd:string ;
+    tgo:isFocusedBy tgo:night_dragon .
+
+tgo:rat a tgo:Malware ;
+    tgo:hasTitle "RAT"^^xsd:string ;
+    tgo:isUsedBy tgo:night_dragon .
+
+tgo:shawn_bracken a tgo:ThreatActor ;
+    tgo:hasTitle "Shawn Bracken "^^xsd:string .
+
+tgo:night_dragon a tgo:ThreatActor ;
+    tgo:hasAlias tgo:apts,
+        tgo:blaster,
+        tgo:greg_hoglund,
+        tgo:shawn_bracken ;
+    tgo:hasAssociatedCampaign tgo:night_dragon_attack,
+        tgo:night_dragon_operation,
+        tgo:operation_aurora ;
+    tgo:hasAssociatedMalware tgo:rat ;
+    tgo:hasTargetedField tgo:energy,
+        tgo:government,
+        tgo:petrochemical_companies ;
+    tgo:hasTitle "Night Dragon "^^xsd:string .
+
