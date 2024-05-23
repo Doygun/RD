@@ -1,0 +1,39 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tgo: <http://example.org/cyber/tgo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+tgo:Campaign a rdfs:Class .
+
+tgo:Malware a rdfs:Class .
+
+tgo:TargetField a rdfs:Class .
+
+tgo:ThreatActor a rdfs:Class .
+
+tgo:hasAlias rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:hasAssociatedCampaign rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:Campaign .
+
+tgo:hasAssociatedMalware rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:Malware .
+
+tgo:hasTargetedField rdfs:domain tgo:ThreatActor ;
+    rdfs:range tgo:TargetField .
+
+tgo:hasTitle rdfs:domain tgo:Campaign,
+        tgo:Malware,
+        tgo:TargetField,
+        tgo:ThreatActor ;
+    rdfs:range xsd:string .
+
+tgo:isFocusedBy rdfs:domain tgo:TargetField ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:isLaunchedBy rdfs:domain tgo:Campaign ;
+    rdfs:range tgo:ThreatActor .
+
+tgo:isUsedBy rdfs:domain tgo:Malware ;
+    rdfs:range tgo:ThreatActor .
+
